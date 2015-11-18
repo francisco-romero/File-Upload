@@ -23,6 +23,27 @@ body #wrapper #content {
   /* Height of the footer element */
 }
 
+html #wrapper #content .fileSection,
+body #wrapper #content .fileSection {
+  width: 100%;
+  min-height: 100px;
+}
+
+html #wrapper #content .fileSection p,
+body #wrapper #content .fileSection p {
+  color: gray;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+
+html #wrapper #content .fileSection p:hover,
+body #wrapper #content .fileSection p:hover {
+  color: black;
+}
+
 html #wrapper #content #results p:hover,
 body #wrapper #content #results p:hover {
   color: red;

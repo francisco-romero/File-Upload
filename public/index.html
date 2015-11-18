@@ -18,12 +18,17 @@
         </div>
 
         <div id="content">
-            <form id="uploadForm" enctype="multipart/form-data" accept-charset="UTF-8" action="/wcc" method="post">
-                <input type="file" name="myTextfile" />
-                <input type="submit" value="Upload file" name="submit">
-            </form>
+            <div class="fileSection">
+                <p>Please select a text file</p>
+                <input type="file" id="textFileBrowse" name="myTextfileField" />
+                <input id="uploadTextFileBtn" type="submit" value="Upload Text File" />
+            </div>
+            <div class="fileSection">
+                <p>Please select a zip file</p>
+                <input type="file" id="zipFileBrowse" name="myZipfileField" />
+                <input id="uploadZipFileBtn" type="submit" value="Upload Zip File" />
+            </div>
             <div id="results"></div>
-
         </div>
 
         <div id="footer">
@@ -35,6 +40,24 @@
 
 
     </div>
+    <script src="./js/fileUpload_client.js"></script>
+    <script>
+        (function main() {
+            var checkLoadTimer = setInterval(function () {
+                if (FileHandlerModule) {
+                    clearInterval(checkLoadTimer);
+                    document.getElementById('textFileBrowse').addEventListener('change', FileHandlerModule.handleFileSelect);
+                    document.getElementById('uploadTextFileBtn').addEventListener('click', function () {
+                        FileHandlerModule.sendFile('text');
+                    });
+                    document.getElementById('zipFileBrowse').addEventListener('change', FileHandlerModule.handleFileSelect);
+                    document.getElementById('uploadZipFileBtn').addEventListener('click', function () {
+                        FileHandlerModule.sendFile('zip');
+                    });
+                }
+            }, 100);
+        })();
+    </script>
 
 </body>
 

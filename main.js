@@ -19,7 +19,7 @@ var express = require('express'),
     zipHandler = require(__dirname + '/my_modules/ZipFileHandler');
 
 /**
- * Initialization of local variables
+ * Initialization of utilitary variables
  */
 var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -34,15 +34,13 @@ var storage = multer.diskStorage({
     });
 
 /**
- * Handler for GET requests with the following route: "/"
- * @param {String} path
- * @param {function} A callback that receives: req {Object} and res {Object}
+ * Constants
  */
-/*app.get('/', function (req, res) {
-    res.sendFile("index.html", {
-        root: __dirname
-    });
-});*/
+var FORM_FIELD = 'uploadedFileField';
+
+/**
+ * Serve static resources (the entry html file and the css/js/img that it uses)
+ */
 app.use(express.static(__dirname + '/public'));
 
 /**
@@ -53,11 +51,11 @@ app.use(express.static(__dirname + '/public'));
  */
 app.post('/wcc', [
   upload.fields([{
-        name: 'myTextfile',
+        name: FORM_FIELD,
         maxCount: 1
     }]),
   function (req, res) {
-        var file = (req.files && req.files.myTextfile && req.files.myTextfile[0]) ? req.files.myTextfile[0] : null,
+        var file = (req.files && req.files[FORM_FIELD] && req.files[FORM_FIELD][0]) ? req.files[FORM_FIELD][0] : null,
             child, zip, returnBodyError = '<p>Error: The file couldn\'t be read in the server.</p>';
 
         if (file && file.originalname && file.originalname.indexOf('.txt') > -1) {

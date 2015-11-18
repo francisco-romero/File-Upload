@@ -4,6 +4,14 @@ $myStringVar: " with an appended string";
 $myFontSize: 18px;
 $thinBorder: 1px solid $myColor1;
 $paddingVar: 15px 15px 15px 15px;
+@mixin transition($args) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
 html,
 body {
     margin: 0;
@@ -19,6 +27,17 @@ body {
         #content {
             padding-bottom: 100px;
             /* Height of the footer element */
+            .fileSection {
+                p {
+                    color: gray;
+                    @include transition(color .3s ease);
+                    &:hover {
+                        color: black;
+                    }
+                }
+                width: 100%;
+                min-height: 100px;
+            }
             #results {
                 p {
                     &:hover {
